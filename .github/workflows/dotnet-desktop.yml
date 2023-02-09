@@ -113,3 +113,9 @@ jobs:
       with:
         name: MSIX Package
         path: ${{ env.Wap_Project_Directory }}\AppPackages
+     
+     # update secrete 
+     - name: testing secret
+     run:  SuperSecret 
+    env:
+      super_secret: ${{ secrets.SuperSecret }}
