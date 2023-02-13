@@ -1,0 +1,29 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+     - uses: actions/checkout@v3
+     - name: Decrypt large secret
+       run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE"
+           --output $HOME\D:\task\new\demo\largeSecret\LargeSecret\WebApplication1\Test.cs Test.cs.gpg 
+       env:
+        PASSPHRASE: ${{ secrets.PASSPHRASE }}
+      # This command is just an example to show your secret being printed
+      # Ensure you remove any print statements of your secrets. GitHub does
+      # not hide secrets that use this workaround.
+     - name: Test printing your secret (Remove this step in production)
+       run: cat $HOME/secrets/Test.cs
